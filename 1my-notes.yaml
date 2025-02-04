@@ -1,0 +1,116 @@
+#References:
+official redhat doc: https://docs.openshift.com/container-platform/4.17/installing/installing_vsphere/upi/installing-vsphere.html#installation-installing-bare-metal_installing-vsphere
+terraform script github: 
+https://github.com/latouchek/OCP4-UPI-Vsphere-StaticIP/blob/main/files/install-config.yaml
+https://github.com/alanadiprastyo/openshift-4.6/blob/master/install-config/append-bootstrap.ign
+
+on BAremetal YT ref(Ryan Hay): https://www.youtube.com/watch?v=d03xg2PKOPg
+Ryan Github: https://github.com/ryanhay/ocp4-metal-install/tree/master
+
+my Github (UPI on Vsphere): https://github.com/divya04-hue/ocp4-metal-install/tree/master
+TS github for RHOCP scenarios: https://github.com/openshift/installer/blob/main/docs/user/troubleshooting.md
+Fix: NOT READY RHOCP nodes: https://access.redhat.com/discussions/7050416
+Fix: bootstrap installation fails with an error : https://access.redhat.com/solutions/5347821
+MImages RHOCP: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.17/4.17.0/
+Fix: bootstrap unable to resolve API and/or API-Int Server URLs (DNS issue) : https://access.redhat.com/solutions/7025568
+
+On Vsphere YT ( UPI on Vsphere by OCPDude): https://www.youtube.com/watch?v=9__hpUWK5vw&t=1337s  && https://www.youtube.com/watch?v=6TvyHBdHhes&t=1700s
+
+--------------------------------------------------------------------------------------------------------------
+
+html: http://10.25.58.30:8080/ocphybrid/
+
+Boot:
+ip=10.25.58.40::10.25.58.1:255.255.255.0:gccvmesxcncdvbt::none nameserver=10.25.60.103
+
+C01:
+ip=10.25.58.41::10.25.58.1:255.255.255.0:gccvmesxcncdvcn01::none nameserver=10.25.60.103
+
+C02:
+ip=10.25.58.42::10.25.58.1:255.255.255.0:gccvmesxcncdvcn02::none nameserver=10.25.60.103
+
+C03:
+ip=10.25.58.43::10.25.58.1:255.255.255.0:gccvmesxcncdvcn03::none nameserver=10.25.60.103
+
+W01:
+ip=10.25.58.44::10.25.58.1:255.255.255.0:gccvmesxcncdvwk01::none nameserver=10.25.60.103
+
+W02:
+ip=10.25.58.45::10.25.58.1:255.255.255.0:gccvmesxcncdvwk02::none nameserver=10.25.60.103
+
+
+
+--------------------------------------------------------------------------------------------------------------
+guestinfo.afterburn.initrd.network-kargs  ---- all ip dets
+guestinfo.ignition.config.data --- cat base64
+guestinfo.ignition.config.data.encoding = base64
+disk.EnableUUID = TRUE
+stealclock.enable = TRUE 
+
+--------------------------------------------------------------------------------------------------------------
+
+
+gccvmesxcncdvbt
+gccvmesxcncdvcn01
+gccvmesxcncdvcn02
+gccvmesxcncdvcn03
+gccvmesxcncdvwk01
+gccvmesxcncdvwk02
+--------------------------------------------------------------------------------------------------------------
+
+
+base64 -w0 ~/ocp-install/master.ign > ~/ocp-install/master.64
+base64 -w0 ~/ocp-install/worker.ign > ~/ocp-install/worker.64
+base64 -w0 ~/ocp-install/merge-bootstrap.ign > ~/ocp-install/merge-bootstrap.64
+
+--------------------------------------------------------------------------------------------------------------
+#if the nodes are not in "READY" state
+cat << EOF | tee /etc/kubernetes/cni/net.d/10-containerd-net.conflist
+{
+ "cniVersion": "1.0.0",
+ "name": "containerd-net",
+ "plugins": [
+   {
+     "type": "bridge",
+     "bridge": "cni0",
+     "isGateway": true,
+     "ipMasq": true,
+     "promiscMode": true,
+     "ipam": {
+       "type": "host-local",
+       "ranges": [
+         [{
+           "subnet": "10.128.0.0/16"
+         }]
+       ],
+       "routes": [
+         { "dst": "0.0.0.0/0" },
+         { "dst": "::/0" }
+       ]
+     }
+   },
+   {
+     "type": "portmap",
+     "capabilities": {"portMappings": true},
+     "externalSetMarkChain": "KUBE-MARK-MASQ"
+   }
+ ]
+}
+EOF
+
+
+
+systemctl status crio
+systemctl restart crio
+
+systemctl status kubelet
+systemctl restart kubelet
+--------------------------------------------------------------------------------------------------------------
+
+for rhel worker node:
+pre-reqs:-
+
+subscription-manager repos --enable="rhel-8-for-x86_64-baseos-rpms" --enable="rhel-8-for-x86_64-appstream-rpms" --enable="rhocp-4.10-for-rhel-8-x86_64-rpms" --enable="fast-datapath-for-rhel-8-x86_64-rpms"
+systemctl disable --now firewalld.service
+sudo dnf install -y coreos-installer
+sudo coreos-installer install /dev/sda -I http://10.25.58.30:8080/ocphybrid/worker.ign --insecure --insecure-ignition --copy-network
