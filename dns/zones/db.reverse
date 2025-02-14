@@ -1,5 +1,5 @@
 $TTL    604800
-@       IN      SOA     gccvmesxcncdvsvc.dev.mindsparks.io. contact.dev.mindsparks.io (
+@       IN      SOA     bastion.dus.riege.io. contact.dus.riege.io (
                   1     ; Serial
              604800     ; Refresh
               86400     ; Retry
@@ -7,18 +7,37 @@ $TTL    604800
              604800     ; Minimum
 )
 
-  IN      NS      gccvmesxcncdvsvc.dev.mindsparks.io.
+  IN      NS      bastion.dus.riege.io.
 
-30      IN    PTR    gccvmesxcncdvsvc.dev.mindsparks.io.
-30      IN    PTR    api.lab.dev.mindsparks.io.
-30      IN    PTR    api-int.lab.dev.mindsparks.io.
+192      IN    PTR    bastion.dus.riege.io.
+64      IN    PTR    api.ocp.dus.riege.io.
+64      IN    PTR    api-int.ocp.dus.riege.io.
 ;
-40    IN    PTR    gccvmesxcncdvbt.lab.dev.mindsparks.io.
+194    IN    PTR    bootstrap.ocp.dus.riege.io.
 ;
-41    IN    PTR    gccvmesxcncdvcn01.lab.dev.mindsparks.io.
-42    IN    PTR    gccvmesxcncdvcn02.lab.dev.mindsparks.io.
-43    IN    PTR    gccvmesxcncdvcn03.lab.dev.mindsparks.io.
+64    IN    PTR    control01.dus6.ocp.dus.riege.io.
+128    IN    PTR    control01.dus7.ocp.dus.riege.io.
+1    IN    PTR    control01.dus5.ocp.dus.riege.io.
 ;
 44    IN    PTR    gccvmesxcncdvwk01.lab.dev.mindsparks.io.
 45    IN    PTR    gccvmesxcncdvwk02.lab.dev.mindsparks.io.
 46    IN    PTR    gccvmesxcncdvwk03.lab.dev.mindsparks.io.
+
+68    IN    PTR    worker01.dus6.ocp.dus.riege.io.
+69    IN    PTR    worker02.dus6.ocp.dus.riege.io.
+70    IN    PTR    worker03.dus6.ocp.dus.riege.io.
+71    IN    PTR    worker04.dus6.ocp.dus.riege.io.
+132    IN    PTR    worker01.dus7.ocp.dus.riege.io.
+133   IN    PTR    worker02.dus7.ocp.dus.riege.io. 
+134    IN    PTR    worker03.dus7.ocp.dus.riege.io.
+135    IN    PTR    worker04.dus7.ocp.dus.riege.io.      
+26    IN    PTR    worker01.dus5.ocp.dus.riege.io.
+27    IN    PTR    worker02.dus5.ocp.dus.riege.io.       
+28    IN    PTR    worker03.dus5.ocp.dus.riege.io.       
+29    IN    PTR    worker04.dus5.ocp.dus.riege.io.      
+83    IN    PTR    odf01.dus6.ocp.dus.riege.io.       
+84    IN    PTR    odf02.dus6.ocp.dus.riege.io.     
+147    IN    PTR    odf01.dus7.ocp.dus.riege.io.      
+148    IN    PTR    odf02.dus7.ocp.dus.riege.io.        
+20    IN    PTR    odf01.dus5.ocp.dus.riege.io.      
+21    IN    PTR    odf02.dus5.ocp.dus.riege.io.

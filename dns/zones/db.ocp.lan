@@ -8,25 +8,40 @@ $TTL    604800
 )
         IN      NS      gccvmesxcncdvsvc
 
-gccvmesxcncdvsvc.dev.mindsparks.io.                       IN      A       10.25.58.30
-gccvmesxcncdvsvc.lab.dev.mindsparks.io.                   IN      A       10.25.58.30
-oauth-openshift.apps.lab.dev.mindsparks.io.               IN      A       10.25.58.30
-console-openshift-console.apps.lab.dev.mindsparks.io.     IN      A       10.25.58.30
+bastion.dus.riege.io.                       IN      A       10.32.1.192
+bastion.ocp.dus.riege.io.                   IN      A      10.32.1.192
+oauth-openshift.apps.ocp.dus.riege.io.               IN      A       10.32.1.192
+console-openshift-console.apps.ocp.dus.riege.io.     IN      A       10.32.1.192
 
 ; Temp Bootstrap Node
-gccvmesxcncdvbt.lab.dev.mindsparks.io.        IN      A      10.25.58.40
+bootstrap.ocp.dus.riege.io.        IN      A      10.25.58.40
 
 ; Control Plane Nodes
-gccvmesxcncdvcn01.lab.dev.mindsparks.io.         IN      A      10.25.58.41
-gccvmesxcncdvcn02.lab.dev.mindsparks.io.         IN      A      10.25.58.42
-gccvmesxcncdvcn03.lab.dev.mindsparks.io.         IN      A      10.25.58.43
+control01.dus6.ocp.dus.riege.io.         IN      A      10.32.1.64
+control01.dus7.ocp.dus.riege.io.         IN      A      10.32.1.128
+control01.dus5.ocp.dus.riege.io.         IN      A      10.32.1.1
 
 ; Worker Nodes
-gccvmesxcncdvwk01.lab.dev.mindsparks.io.        IN      A      10.25.58.44
-gccvmesxcncdvwk02.lab.dev.mindsparks.io.        IN      A      10.25.58.45
-gccvmesxcncdvwk03.lab.dev.mindsparks.io.        IN      A      10.25.58.46
+worker01.dus6.ocp.dus.riege.io.        IN      A      10.32.1.68
+worker02.dus6.ocp.dus.riege.io.        IN      A      10.32.1.69
+worker03.dus6.ocp.dus.riege.io.        IN      A      10.32.1.70
+worker04.dus6.ocp.dus.riege.io.        IN      A      10.32.1.71
+worker01.dus7.ocp.dus.riege.io.        IN      A      10.32.1.132
+worker02.dus7.ocp.dus.riege.io.        IN      A      10.32.1.133
+worker03.dus7.ocp.dus.riege.io.        IN      A      10.32.1.134
+worker04.dus7.ocp.dus.riege.io.        IN      A      10.32.1.135
+worker01.dus5.ocp.dus.riege.io.        IN      A      10.32.1.26
+worker02.dus5.ocp.dus.riege.io.        IN      A      10.32.1.27
+worker03.dus5.ocp.dus.riege.io.        IN      A      10.32.1.28
+worker04.dus5.ocp.dus.riege.io.        IN      A      10.32.1.29
+odf01.dus6.ocp.dus.riege.io.        IN      A      10.32.1.83
+odf02.dus6.ocp.dus.riege.io.        IN      A      10.32.1.84
+odf01.dus7.ocp.dus.riege.io.        IN      A      10.32.1.147
+odf02.dus7.ocp.dus.riege.io.        IN      A      10.32.1.148
+odf01.dus5.ocp.dus.riege.io.        IN      A      10.32.1.20
+odf02.dus5.ocp.dus.riege.io.        IN      A      10.32.1.21
 
 ; OpenShift Internal - Load balancer
-api.lab.dev.mindsparks.io.        IN    A    10.25.58.30
-api-int.lab.dev.mindsparks.io.    IN    A    10.25.58.30
-*.apps.lab.dev.mindsparks.io.     IN    A    10.25.58.30
+api.ocp.dus.riege.io.        IN    A    10.32.1.64
+api-int.ocp.dus.riege.io.    IN    A    10.32.1.64
+*.apps.ocp.dus.riege.io.     IN    A    10.32.1.64
