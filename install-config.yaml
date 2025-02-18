@@ -21,4 +21,4 @@ platform:
   none: {} 
 fips: false 
 pullSecret: ''
-sshKey: '' 
+sshKey: 'Hi' 
