@@ -24,7 +24,7 @@ $TTL    604800
 70    IN    PTR    worker03.dus6.ocp.dus.riege.io.
 71    IN    PTR    worker04.dus6.ocp.dus.riege.io.
 132    IN    PTR    worker01.dus7.ocp.dus.riege.io.
-133   IN    PTR    worker02.dus7.ocp.dus.riege.io. 
+133    IN    PTR    worker02.dus7.ocp.dus.riege.io. 
 134    IN    PTR    worker03.dus7.ocp.dus.riege.io.
 135    IN    PTR    worker04.dus7.ocp.dus.riege.io.      
 26    IN    PTR    worker01.dus5.ocp.dus.riege.io.
