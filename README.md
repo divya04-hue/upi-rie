@@ -231,16 +231,16 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    Apply configuration
 
    ```bash
-   \cp ~/RHOCP-UPI-hybrid/dns/named.conf /etc/named.conf
-   \cp -R ~/RHOCP-UPI-hybrid/dns/zones /etc/named/
+   \cp ~/upi-rie/dns/named.conf /etc/named.conf
+   \cp -R ~/upi-rie/dns/zones /etc/named/
    ```
 
    Configure the firewall for DNS
 
    ```bash
-   firewall-cmd --add-port=53/udp --zone=internal --permanent
+   firewall-cmd --add-port=53/udp --permanent
    # for OCP 4.9 and later 53/tcp is required
-   firewall-cmd --add-port=53/tcp --zone=internal --permanent
+   firewall-cmd --add-port=53/tcp --permanent
    firewall-cmd --reload
    ```
 
@@ -286,7 +286,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    Edit dhcpd.conf from the cloned git repo to have the correct mac address for each host and copy the conf file to the correct location for the DHCP service to use
 
    ```bash
-   \cp ~/RHOCP-UPI-hybrid/dhcpd.conf /etc/dhcp/dhcpd.conf
+   \cp ~/upi-rie/dhcpd.conf /etc/dhcp/dhcpd.conf
    ```
 
    Configure the Firewall
@@ -322,7 +322,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    Configure the firewall for Web Server traffic
 
    ```bash
-   firewall-cmd --add-port=8080/tcp --zone=internal --permanent
+   firewall-cmd --add-port=8080/tcp --permanent
    firewall-cmd --reload
    ```
 
@@ -352,7 +352,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    Copy HAProxy config
 
    ```bash
-   \cp ~/RHOCP-UPI-hybrid/haproxy.cfg /etc/haproxy/haproxy.cfg
+   \cp ~/upi-rie/haproxy.cfg /etc/haproxy/haproxy.cfg
    ```
 
    Configure the Firewall
@@ -360,14 +360,14 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    > Note: Opening port 9000 in the external zone allows access to HAProxy stats that are useful for monitoring and troubleshooting. The UI can be accessed at: `http://{ocp-svc_IP_address}:9000/stats`
 
    ```bash
-   firewall-cmd --add-port=6443/tcp --zone=internal --permanent # kube-api-server on control plane nodes
-   firewall-cmd --add-port=6443/tcp --zone=external --permanent # kube-api-server on control plane nodes
-   firewall-cmd --add-port=22623/tcp --zone=internal --permanent # machine-config server
-   firewall-cmd --add-service=http --zone=internal --permanent # web services hosted on worker nodes
-   firewall-cmd --add-service=http --zone=external --permanent # web services hosted on worker nodes
-   firewall-cmd --add-service=https --zone=internal --permanent # web services hosted on worker nodes
-   firewall-cmd --add-service=https --zone=external --permanent # web services hosted on worker nodes
-   firewall-cmd --add-port=9000/tcp --zone=external --permanent # HAProxy Stats
+   firewall-cmd --add-port=6443/tcp --permanent # kube-api-server on control plane nodes
+   firewall-cmd --add-port=6443/tcp --permanent # kube-api-server on control plane nodes
+   firewall-cmd --add-port=22623/tcp --permanent # machine-config server
+   firewall-cmd --add-service=http --permanent # web services hosted on worker nodes
+   firewall-cmd --add-service=http --permanent # web services hosted on worker nodes
+   firewall-cmd --add-service=https --permanent # web services hosted on worker nodes
+   firewall-cmd --add-service=https --permanent # web services hosted on worker nodes
+   firewall-cmd --add-port=9000/tcp --permanent # HAProxy Stats
    firewall-cmd --reload
    ```
 
@@ -402,16 +402,16 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    Export the Share
 
    ```bash
-   echo "/shares/registry  10.25.58.0/24(rw,sync,root_squash,no_subtree_check,no_wdelay)" > /etc/exports
+   echo "/shares/registry  10.32.1.0/24(rw,sync,root_squash,no_subtree_check,no_wdelay)" > /etc/exports
    exportfs -rv
    ```
 
    Set Firewall rules:
 
    ```bash
-   firewall-cmd --zone=internal --add-service mountd --permanent
-   firewall-cmd --zone=internal --add-service rpc-bind --permanent
-   firewall-cmd --zone=internal --add-service nfs --permanent
+   firewall-cmd --add-service mountd --permanent
+   firewall-cmd --add-service rpc-bind --permanent
+   firewall-cmd --add-service nfs --permanent
    firewall-cmd --reload
    ```
 
@@ -435,13 +435,13 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
 1. Create an install directory
 
    ```bash
-   mkdir ~/ocp-hybrid
+   mkdir ~/ocp-riege
    ```
 
 1. Copy the install-config.yaml included in the clones repository to the install directory
 
    ```bash
-   cp ~/RHOCP-UPI-hybrid/install-config.yaml ~/ocp-hybrid/
+   cp ~/upi-rie/install-config.yaml ~/ocp-riege/
    ```
 
 1. Update the install-config.yaml with your own pull-secret and ssh key.
@@ -450,21 +450,21 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    - Line 24 should contain the contents of your '~/.ssh/id_rsa.pub'
 
    ```bash
-   vim ~/ocp-hybrid/install-config.yaml
+   vim ~/ocp-riege/install-config.yaml
    ```
 
 1. Generate Kubernetes manifest files
 
    ```bash
-   ./openshift-install create manifests --dir ~/ocp-hybrid
+   ./openshift-install create manifests --dir ~/ocp-riege
    ```
    ```bash
-   mkdir ocp-hybrid-copy
-   cp -r ocp-hybrid/ ocp-hybrid-copy
+   mkdir ocp-riege-copy
+   cp -r ocp-riege/ ocp-riege-copy
    ```
 
    > A warning is shown about making the control plane nodes schedulable. It is up to you if you want to run workloads on the Control Plane nodes. If you dont want to you can disable this with:
-   > `sed -i 's/mastersSchedulable: true/mastersSchedulable: false/' ~/ocp-hybrid/manifests/cluster-scheduler-02-config.yml`.
+   > `sed -i 's/mastersSchedulable: true/mastersSchedulable: false/' ~/ocp-riege/manifests/cluster-scheduler-02-config.yml`.
    > Make any other custom changes you like to the core Kubernetes manifest files.
 
 
@@ -482,8 +482,8 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
 4. Generate the Ignition config and Kubernetes auth files
 
    ```bash
-   ./openshift-install create ignition-configs --dir ~/ocp-hybrid/
-   tree ocp-hybrid
+   ./openshift-install create ignition-configs --dir ~/ocp-riege/
+   tree ocp-riege
    ```
    
 5. Locate the following Ignition config files that the installation program created:
@@ -495,14 +495,14 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    <installation_directory>/merge-bootstrap.ign
    
    ```bash
-   cp ~/RHOCP-UPI-hybrid/merge-bootstrap.ign ~/ocp-hybrid/
-   tree ocp-hybrid
+   cp ~/upi-rie/merge-bootstrap.ign ~/ocp-riege/
+   tree ocp-riege
    ```
 
    ```bash
-   base64 -w0 ~/ocp-hybrid/master.ign > ~/ocp-hybrid/master.64
-   base64 -w0 ~/ocp-hybrid/worker.ign > ~/ocp-hybrid/worker.64
-   base64 -w0 ~/ocp-hybrid/merge-bootstrap.ign > ~/ocp-hybrid/merge-bootstrap.64
+   base64 -w0 ~/ocp-riege/master.ign > ~/ocp-riege/master.64
+   base64 -w0 ~/ocp-riege/worker.ign > ~/ocp-riege/worker.64
+   base64 -w0 ~/ocp-riege/merge-bootstrap.ign > ~/ocp-riege/merge-bootstrap.64
    ```
 ---------------------------------------------------------------
 
@@ -515,7 +515,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
 1. Copy all generated install files to the new web server directory
 
    ```bash
-   cp -R ~/ocp-hybrid/* /var/www/html/ocphybrid
+   cp -R ~/ocp-riege/* /var/www/html/ocphybrid
    ```
 
 1. Move the Core OS image to the web server directory (later you need to type this path multiple times so it is a good idea to shorten the name)
@@ -893,7 +893,7 @@ cd /usr/share/ansible/openshift-ansible/inventory/hosts
 ansible_user=root
 ansible_become=True
 
-openshift_kubeconfig_path="~/ocp-hybrid/auth/kubeconfig"
+openshift_kubeconfig_path="~/ocp-riege/auth/kubeconfig"
 
 [new_workers]
 gccvmesxcncdvwk01.lab.dev.mindsparks.io ansible_host=10.25.58.44
@@ -923,8 +923,8 @@ oc adm certificate approve <csr_name>
 1. You can monitor the bootstrap process from the ocp-svc host at different log levels (debug, error, info)
 
    ```bash
-   ./openshift-install --dir ~/ocp-hybrid wait-for bootstrap-complete --log-level=debug
-   ./openshift-install --dir ~/ocp-hybrid wait-for bootstrap-complete --log-level=info
+   ./openshift-install --dir ~/ocp-riege wait-for bootstrap-complete --log-level=debug
+   ./openshift-install --dir ~/ocp-riege wait-for bootstrap-complete --log-level=info
    ```
 
 1. Once bootstrapping is complete the ocp-boostrap node [can be removed](#remove-the-bootstrap-node)
