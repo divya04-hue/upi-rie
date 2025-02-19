@@ -509,33 +509,33 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
 1. Create a hosting directory to serve the configuration files for the OpenShift booting process
 
    ```bash
-   mkdir /var/www/html/ocphybrid
+   mkdir /var/www/html/ocpriege
    ```
 
 1. Copy all generated install files to the new web server directory
 
    ```bash
-   cp -R ~/ocp-riege/* /var/www/html/ocphybrid
+   cp -R ~/ocp-riege/* /var/www/html/ocpriege
    ```
 
 1. Move the Core OS image to the web server directory (later you need to type this path multiple times so it is a good idea to shorten the name)
 
    ```bash
-   mv ~/rhcos-X.X.X-x86_64-metal.x86_64.raw.gz /var/www/html/ocphybrid/rhcos
+   mv ~/rhcos-X.X.X-x86_64-metal.x86_64.raw.gz /var/www/html/ocpriege/rhcos
    ```
 
 1. Change ownership and permissions of the web server directory
 
    ```bash
-   chcon -R -t httpd_sys_content_t /var/www/html/ocphybrid/
-   chown -R apache: /var/www/html/ocphybrid/
-   chmod 755 /var/www/html/ocphybrid/
+   chcon -R -t httpd_sys_content_t /var/www/html/ocpriege/
+   chown -R apache: /var/www/html/ocpriege/
+   chmod 755 /var/www/html/ocpriege/
    ```
 
 1. Confirm you can see all files added to the `/var/www/html/ocp4/` dir through Apache
 
    ```bash
-   curl localhost:8080/ocphybrid/
+   curl localhost:8080/ocpriege/
    ```
 
 ## Deploy OpenShift
@@ -579,7 +579,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    coreos.inst.install_dev=sda coreos.inst.image_url=http://192.168.22.1:8080/ocp4/rhcos coreos.inst.insecure=yes coreos.inst.ignition_url=http://192.168.22.1:8080/ocp4/bootstrap.ign
    
    # Or if you waited for it boot, use the following command then just reboot after it finishes and make sure you remove the attached .iso
-   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocphybrid/rhcos -I http://10.25.58.30:8080/ocphybrid/bootstrap.ign --insecure --insecure-ignition --copy-network
+   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocpriege/rhcos -I http://10.25.58.30:8080/ocpriege/bootstrap.ign --insecure --insecure-ignition --copy-network
    ```
 
    ```bash
@@ -587,7 +587,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    coreos.inst.install_dev=sda coreos.inst.image_url=http://192.168.22.1:8080/ocp4/rhcos coreos.inst.insecure=yes coreos.inst.ignition_url=http://192.168.22.1:8080/ocp4/master.ign
    
    # Or if you waited for it boot, use the following command then just reboot after it finishes and make sure you remove the attached .iso
-   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocphybrid/rhcos -I http://10.25.58.30:8080/ocphybrid/master.ign --insecure --insecure-ignition --copy-network
+   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocpriege/rhcos -I http://10.25.58.30:8080/ocpriege/master.ign --insecure --insecure-ignition --copy-network
    ```
 
 1. Power on the ocp-w-\# hosts and select 'Tab' to enter boot configuration. Enter the following configuration:
@@ -597,7 +597,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    coreos.inst.install_dev=sda coreos.inst.image_url=http://192.168.22.1:8080/ocp4/rhcos coreos.inst.insecure=yes coreos.inst.ignition_url=http://192.168.22.1:8080/ocp4/worker.ign
    
    # Or if you waited for it boot, use the following command then just reboot after it finishes and make sure you remove the attached .iso
-   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocphybrid/rhcos -I http://10.25.58.30:8080/ocphybrid/worker.ign --insecure --insecure-ignition --copy-network
+   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocpriege/rhcos -I http://10.25.58.30:8080/ocpriege/worker.ign --insecure --insecure-ignition --copy-network
    ```
 
 # RHEL Worker node
