@@ -579,7 +579,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    coreos.inst.install_dev=sda coreos.inst.image_url=http://192.168.22.1:8080/ocp4/rhcos coreos.inst.insecure=yes coreos.inst.ignition_url=http://192.168.22.1:8080/ocp4/bootstrap.ign
    
    # Or if you waited for it boot, use the following command then just reboot after it finishes and make sure you remove the attached .iso
-   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocpriege/rhcos -I http://10.25.58.30:8080/ocpriege/bootstrap.ign --insecure --insecure-ignition --copy-network
+   sudo coreos-installer install /dev/sda -I http://10.32.1.192:8080/ocpriege/bootstrap.ign --insecure --insecure-ignition --copy-network
    ```
 
    ```bash
@@ -587,7 +587,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    coreos.inst.install_dev=sda coreos.inst.image_url=http://192.168.22.1:8080/ocp4/rhcos coreos.inst.insecure=yes coreos.inst.ignition_url=http://192.168.22.1:8080/ocp4/master.ign
    
    # Or if you waited for it boot, use the following command then just reboot after it finishes and make sure you remove the attached .iso
-   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocpriege/rhcos -I http://10.25.58.30:8080/ocpriege/master.ign --insecure --insecure-ignition --copy-network
+   sudo coreos-installer install /dev/sda -I http://10.32.1.192:8080/ocpriege/master.ign --insecure --insecure-ignition --copy-network
    ```
 
 1. Power on the ocp-w-\# hosts and select 'Tab' to enter boot configuration. Enter the following configuration:
@@ -597,7 +597,7 @@ https://docs.redhat.com/en/documentation/openshift_container_platform/4.6/html/o
    coreos.inst.install_dev=sda coreos.inst.image_url=http://192.168.22.1:8080/ocp4/rhcos coreos.inst.insecure=yes coreos.inst.ignition_url=http://192.168.22.1:8080/ocp4/worker.ign
    
    # Or if you waited for it boot, use the following command then just reboot after it finishes and make sure you remove the attached .iso
-   sudo coreos-installer install /dev/sda -u http://10.25.58.30:8080/ocpriege/rhcos -I http://10.25.58.30:8080/ocpriege/worker.ign --insecure --insecure-ignition --copy-network
+   sudo coreos-installer install /dev/sda -I http://10.32.1.192:8080/ocpriege/worker.ign --insecure --insecure-ignition --copy-network
    ```
 
 # RHEL Worker node
