@@ -752,7 +752,6 @@ INFO Bootstrap complete
 
    > From your local workstation
    > If you do not want to add an entry for each new service made available on OpenShift you can configure the ocp-svc DNS server to serve externally and create a wildcard entry for \*.apps.lab.ocp.lan
-
    ```bash
    # Open the hosts file
    sudo vi /etc/hosts
