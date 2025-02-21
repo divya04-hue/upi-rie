@@ -3,7 +3,7 @@ baseDomain: dus.riege.io
 compute: 
 - hyperthreading: Enabled 
   name: worker
-  replicas: 0 # In upi, it'll be 0
+  replicas: 0
 controlPlane: 
   hyperthreading: Enabled 
   name: master
