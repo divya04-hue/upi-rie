@@ -3,7 +3,7 @@
     "config": {
       "merge": [
         {
-          "source": "http://10.32.1.192:8080/rhocp/bootstrap.ign", 
+          "source": "http://10.32.1.192:8080/ocpriege/bootstrap.ign", 
           "verification": {}
         }
       ]
