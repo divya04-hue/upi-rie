@@ -10,8 +10,8 @@ $TTL    604800
   IN      NS      bastion.dus.riege.io.
 
 192      IN    PTR    bastion.dus.riege.io.
-64      IN    PTR    api.ocp.dus.riege.io.
-64      IN    PTR    api-int.ocp.dus.riege.io.
+192      IN    PTR    api.ocp.dus.riege.io.
+192      IN    PTR    api-int.ocp.dus.riege.io.
 ;
 194    IN    PTR    bootstrap.ocp.dus.riege.io.
 ;
