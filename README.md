@@ -623,8 +623,8 @@ INFO Bootstrap complete
 1. You can monitor the bootstrap process from the ocp-svc host at different log levels (debug, error, info)
 
    ```bash
-   ./openshift-install --dir ~/ocp-install wait-for bootstrap-complete --log-level=debug
-   ./openshift-install --dir ~/ocp-install wait-for bootstrap-complete --log-level=info
+   openshift-install --dir ~/ocp-riege wait-for bootstrap-complete --log-level=debug
+   openshift-install --dir ~/ocp-riege wait-for bootstrap-complete --log-level=info
    ```
 
 1. Once bootstrapping is complete the ocp-boostrap node [can be removed](#remove-the-bootstrap-node)
