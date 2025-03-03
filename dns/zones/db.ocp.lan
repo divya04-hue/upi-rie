@@ -1,13 +1,13 @@
 $TTL    604800
-@       IN      SOA     gccvmesxcncdvsvc.dev.mindsparks.io. contact.dev.mindsparks.io (
+@       IN      SOA     bastion.dus.riege.io. root (
                   1     ; Serial
              604800     ; Refresh
               86400     ; Retry
             2419200     ; Expire
              604800     ; Minimum
 )
-        IN      NS      bastion
-
+        IN      NS      bastion.dus.riege.io
+;
 bastion.dus.riege.io.                       IN      A       10.32.1.192
 bastion.ocp.dus.riege.io.                   IN      A      10.32.1.192
 oauth-openshift.apps.ocp.dus.riege.io.               IN      A       10.32.1.192
@@ -44,3 +44,5 @@ odf02.dus5.ocp.dus.riege.io.        IN      A      10.32.1.21
 api.ocp.dus.riege.io.        IN    A    10.32.1.192
 api-int.ocp.dus.riege.io.    IN    A    10.32.1.192
 *.apps.ocp.dus.riege.io.     IN    A    10.32.1.192
+;
+;EOF

@@ -1,14 +1,13 @@
 $TTL    604800
-@       IN      SOA     bastion.dus.riege.io. contact.dus.riege.io (
+@       IN      SOA     bastion.dus.riege.io. root (
                   1     ; Serial
              604800     ; Refresh
               86400     ; Retry
             2419200     ; Expire
              604800     ; Minimum
 )
-
-  IN      NS      bastion.dus.riege.io.
-
+        IN      NS      bastion.dus.riege.io.
+;
 192      IN    PTR    bastion.dus.riege.io.
 192      IN    PTR    api.ocp.dus.riege.io.
 192      IN    PTR    api-int.ocp.dus.riege.io.
@@ -37,3 +36,5 @@ $TTL    604800
 148    IN    PTR    odf02.dus7.ocp.dus.riege.io.        
 20    IN    PTR    odf01.dus5.ocp.dus.riege.io.      
 21    IN    PTR    odf02.dus5.ocp.dus.riege.io.
+;
+;EOF
