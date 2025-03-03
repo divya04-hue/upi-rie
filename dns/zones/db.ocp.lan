@@ -14,12 +14,12 @@ oauth-openshift.apps.ocp.dus.riege.io.               IN      A       10.32.1.192
 console-openshift-console.apps.ocp.dus.riege.io.     IN      A       10.32.1.192
 ; Temp Bootstrap Node
 bootstrap.ocp.dus.riege.io.        IN      A      10.32.1.194
-
+;
 ; Control Plane Nodes
 control01.dus6.ocp.dus.riege.io.         IN      A      10.32.1.64
 control01.dus7.ocp.dus.riege.io.         IN      A      10.32.1.128
 control01.dus5.ocp.dus.riege.io.         IN      A      10.32.1.1
-
+;
 ; Worker Nodes
 worker01.dus6.ocp.dus.riege.io.        IN      A      10.32.1.68
 worker02.dus6.ocp.dus.riege.io.        IN      A      10.32.1.69
@@ -39,7 +39,7 @@ odf01.dus7.ocp.dus.riege.io.        IN      A      10.32.1.147
 odf02.dus7.ocp.dus.riege.io.        IN      A      10.32.1.148
 odf01.dus5.ocp.dus.riege.io.        IN      A      10.32.1.20
 odf02.dus5.ocp.dus.riege.io.        IN      A      10.32.1.21
-
+;
 ; OpenShift Internal - Load balancer
 api.ocp.dus.riege.io.        IN    A    10.32.1.192
 api-int.ocp.dus.riege.io.    IN    A    10.32.1.192
