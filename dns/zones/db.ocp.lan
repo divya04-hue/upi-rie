@@ -6,7 +6,7 @@ $TTL    604800
             2419200     ; Expire
              604800     ; Minimum
 )
-   IN      NS      bastion.dus.riege.io
+        IN      NS      bastion
 
 bastion.dus.riege.io.                       IN      A       10.32.1.192
 bastion.ocp.dus.riege.io.                   IN      A      10.32.1.192
