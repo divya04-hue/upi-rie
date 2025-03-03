@@ -1,5 +1,5 @@
 $TTL    604800
-@       IN      SOA     bastion.dus.riege.io. root (
+@       IN      SOA     bastion.dus.riege.io. contact.dus.riege.io (
                   1     ; Serial
              604800     ; Refresh
               86400     ; Retry
