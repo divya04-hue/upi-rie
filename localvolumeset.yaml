@@ -1,0 +1,19 @@
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeSet
+metadata:
+  name: odf-storage
+  namespace: openshift-storage
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: cluster.ocs.openshift.io/openshift-storage
+        operator: Exists
+  storageClassName: odf-storageclass
+  volumeMode: Block
+  deviceInclusionSpec:
+    deviceTypes:
+      - disk
+    deviceNamePatterns:
+      - "nvme[0-11]n1"
+  maxDeviceCount: 12
